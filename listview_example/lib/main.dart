@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         title: Text('Listview Example'),
       ),
       body: TabBarView(
-        children: <Widget>[FirstApp(list: animalList), SecondApp()],
+        children: <Widget>[FirstApp(list: animalList), SecondApp(list: animalList)],
         controller: tabController,
       ),
       bottomNavigationBar: TabBar(tabs: <Tab>[
