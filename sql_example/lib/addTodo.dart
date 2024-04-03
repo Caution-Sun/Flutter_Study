@@ -4,6 +4,7 @@ import 'todo.dart';
 
 class AddTodoApp extends StatefulWidget {
   final Future<Database> db;
+
   AddTodoApp(this.db);
 
   @override
@@ -12,25 +13,54 @@ class AddTodoApp extends StatefulWidget {
   }
 }
 
-class _AddTodoApp extends State<StatefulWidget>{
+class _AddTodoApp extends State<StatefulWidget> {
+  TextEditingController? titleController;
+  TextEditingController? contentController;
 
   @override
   void initState() {
-
+    super.initState();
+    titleController = new TextEditingController();
+    contentController = new TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Todo 추가'),),
+      appBar: AppBar(
+        title: Text('Todo 추가'),
+      ),
       body: Container(
         child: Center(
           child: Column(
-            children: <Widget>[],
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: TextField(
+                  controller: titleController,
+                  decoration: InputDecoration(labelText: '제목'),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: TextField(
+                  controller: contentController,
+                  decoration: InputDecoration(labelText: '할 일'),
+                ),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Todo todo = Todo(
+                        title: titleController!.value.text,
+                        content: contentController!.value.text,
+                        active: 0);
+                    Navigator.of(context).pop(todo);
+                  },
+                  child: Text('저장하기'))
+            ],
           ),
         ),
       ),
     );
   }
-
 }
